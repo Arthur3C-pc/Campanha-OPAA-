@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campanha OPAA - Amigos de Patas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { background: #F4F1EA; font-family: 'Open Sans', sans-serif; overflow: hidden; color: #3E362E; }
+      .presentation-container { width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; background: #F4F1EA; }
+      .slide { width: 1280px; height: 720px; background: #FFFFFF; display: none; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+      .slide.active { display: flex; }
+      
+      /* CONTROLES */
+      .controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; background: rgba(62, 54, 46, 0.9); padding: 12px 25px; border-radius: 50px; }
+      .controls button { background: #769471; color: #FFFFFF; border: none; padding: 8px 18px; font-size: 14px; cursor: pointer; border-radius: 20px; font-weight: bold; transition: all 0.3s; font-family: 'Montserrat', sans-serif; }
+      .controls button:hover { background: #5D7A58; transform: translateY(-2px); }
+      .slide-counter { position: fixed; top: 20px; right: 30px; color: #769471; font-size: 16px; background: #FFFFFF; padding: 8px 15px; border-radius: 10px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+
+      /* DESIGN ORGÂNICO */
+      .bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; animation: softFade 2s ease-out; }
+      .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(244, 241, 234, 0.85); z-index: 2; }
+      .content-box { position: relative; z-index: 10; padding: 60px 100px; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+      
+      .headline { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 64px; line-height: 1.1; text-transform: uppercase; margin-bottom: 20px; color: #3E362E; animation: fadeInRight 0.8s ease-out; }
+      .headline span { color: #769471; }
+      .divider { width: 120px; height: 8px; background: #769471; margin-bottom: 30px; border-radius: 4px; animation: growWidth 0.8s ease-out 0.2s both; }
+
+      @keyframes fadeInRight { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+      @keyframes growWidth { from { width: 0; } to { width: 120px; } }
+      @keyframes softFade { from { opacity: 0; } to { opacity: 1; } }
+
+      /* SLIDE 1: CAPA */
+      #slide-1 .bg-overlay { background: linear-gradient(90deg, rgba(244, 241, 234, 0.95) 30%, rgba(244, 241, 234, 0.4) 100%); }
+      #slide-1 .names { font-family: 'Montserrat', sans-serif; font-size: 20px; color: #5D7A58; margin-top: 30px; font-weight: 700; letter-spacing: 1px; }
+      
+      /* SLIDE 2: EQUIPE */
+      .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+      .team-card { background: #FFFFFF; border: 1px solid #E5E1D8; border-top: 5px solid #769471; padding: 25px; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.03); }
+      .member-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #3E362E; display: block; }
+      .member-role { font-size: 13px; color: #8A817C; margin-top: 8px; line-height: 1.4; }
+
+      /* SLIDE 4: GASTOS */
+      .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+      .stat-item { background: #F9F7F2; padding: 40px; border-radius: 20px; border: 2px solid #E5E1D8; text-align: center; }
+      .stat-value { font-family: 'Montserrat', sans-serif; font-size: 54px; font-weight: 900; color: #A44A3F; display: block; }
+      .stat-label { font-size: 16px; color: #3E362E; text-transform: uppercase; font-weight: 700; margin-top: 10px; }
+
+      /* SLIDE 6: PIX */
+      .pix-box { background: #FFFFFF; border: 3px solid #769471; padding: 50px; border-radius: 30px; text-align: center; margin-top: 20px; position: relative; }
+      .pix-key { font-family: 'Montserrat', sans-serif; font-size: 48px; color: #3E362E; font-weight: 900; letter-spacing: 1px; }
+      .pix-tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #769471; color: #FFFFFF; padding: 5px 20px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+
+      .text-content { font-size: 22px; line-height: 1.7; color: #5C544E; max-width: 800px; }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- SLIDE 1: CAPA -->
+        <div class="slide active" id="slide-1">
+            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1280&h=720&auto=format&fit=crop" class="bg-image">
+            <div class="bg-overlay"></div>
+            <div class="content-box">
+                <h1 class="headline">AMIGOS DE PATAS:<br><span>MISSÃO OPAA</span></h1>
+                <div class="divider"></div>
+                <p class="text-content">Unindo o colégio pela proteção animal em Arapongas.</p>
+                <div class="names">Arthur • Kayky • Victor Hugo • Isabela Fantin • Vitória</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: EQUIPE E ESTRATÉGIA -->
+        <div class="slide" id="slide-2">
+            <div class="content-box">
+                <h2 class="headline">NOSSA <span>ORGANIZAÇÃO</span></h2>
+                <div class="divider"></div>
+                <div class="team-grid">
+                    <div class="team-card"><span class="member-name">ARTHUR</span><span class="member-role">Logística: Organização da coleta e transporte das doações.</span></div>
+                    <div class="team-card"><span class="member-name">KAYKY</span><span class="member-role">Comunicação: Divulgação visual e avisos nas salas.</span></div>
+                    <div class="team-card"><span class="member-name">VICTOR HUGO</span><span class="member-role">Relações: Contato oficial e visitas à ONG OPAA.</span></div>
+                    <div class="team-card"><span class="member-name">ISABELA FANTIN</span><span class="member-role">Gestão: Controle financeiro e triagem de suprimentos.</span></div>
+                    <div class="team-card"><span class="member-name">VITÓRIA</span><span class="member-role">Mobilização: Engajamento direto com os 1.000 alunos.</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: O ROSTO DA CAUSA -->
+        <div class="slide" id="slide-3">
+            <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1280&h=720&auto=format&fit=crop" class="bg-image">
+            <div class="bg-overlay" style="background: rgba(244, 241, 234, 0.7);"></div>
+            <div class="content-box">
+                <h2 class="headline">POR QUE <span>ESTAMOS AQUI?</span></h2>
+                <div class="divider"></div>
+                <p class="text-content">A OPAA cuida de 170 animais que foram abandonados ou feridos. Cada olhar desses animais pede por uma chance que só a nossa união pode oferecer.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: DIFICULDADES REAIS -->
+        <div class="slide" id="slide-4">
+            <div class="content-box">
+                <h2 class="headline">DESAFIOS <span>DIÁRIOS</span></h2>
+                <div class="divider"></div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">2.500 KG</span>
+                        <span class="stat-label">Ração Mensal</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">CRÍTICO</span>
+                        <span class="stat-label">Remédios e Cirurgias</span>
+                    </div>
+                </div>
+                <p style="margin-top: 30px; font-size: 20px; color: #5C544E;">A maior dificuldade da ONG é manter o estoque de comida e custear atendimentos de emergência para animais atropelados.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: NOSSA FORÇA COLETIVA -->
+        <div class="slide" id="slide-5">
+            <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?q=80&w=1280&h=720&auto=format&fit=crop" class="bg-image">
+            <div class="bg-overlay" style="background: rgba(118, 148, 113, 0.2);"></div>
+            <div class="content-box">
+                <h2 class="headline" style="color: #FFFFFF; text-shadow: 0 4px 10px rgba(0,0,0,0.3);">O PODER DE <span>1.000 ALUNOS</span></h2>
+                <div class="divider" style="background: #FFFFFF;"></div>
+                <p class="text-content" style="color: #FFFFFF; font-weight: 700; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">Se cada um de nós fizer um pequeno gesto, transformamos a fome em esperança. O colégio é a maior rede de apoio de Arapongas.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: DOAÇÃO IMEDIATA -->
+        <div class="slide" id="slide-6">
+            <div class="content-box">
+                <h2 class="headline">AJUDA <span>AGORA</span></h2>
+                <div class="divider"></div>
+                <p class="text-content">O PIX é a forma mais rápida de garantir uma cirurgia de emergência ou o prato de comida de hoje.</p>
+                <div class="pix-box">
+                    <span class="pix-tag">CHAVE PIX (CNPJ OPAA)</span>
+                    <span class="pix-key">12.153.943/0001-33</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: ENCERRAMENTO -->
+        <div class="slide" id="slide-7">
+            <img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?q=80&w=1280&h=720&auto=format&fit=crop" class="bg-image">
+            <div class="bg-overlay"></div>
+            <div class="content-box" style="text-align: center; align-items: center;">
+                <h1 class="headline">VAMOS <span>MUDAR VIDAS?</span></h1>
+                <div class="divider" style="margin: 0 auto 30px;"></div>
+                <p class="text-content">Siga e apoie: @canil.opaa.arapongas</p>
+                <p style="margin-top: 20px; font-weight: 700; color: #769471;">Obrigado pela atenção de todos!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="previousSlide()">← Anterior</button>
+        <button onclick="nextSlide()">Próximo →</button>
+    </div>
+    <div class="slide-counter"><span id="current-slide">1</span> / 7</div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if (n > totalSlides) currentSlide = totalSlides;
+            else if (n < 1) currentSlide = 1;
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.getElementById('slide-' + currentSlide).classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide;
+        }
+        function nextSlide() { currentSlide++; showSlide(currentSlide); }
+        function previousSlide() { currentSlide--; showSlide(currentSlide); }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
